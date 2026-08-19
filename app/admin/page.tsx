@@ -2,30 +2,54 @@
 
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Lock, Mail, Phone, Calendar, LogOut } from 'lucide-react';
+import { Lock, Mail, Phone, Calendar, LogOut, Loader2 } from 'lucide-react';
 
 export default function AdminDashboard() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
+  const [session, setSession] = useState<any>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [quotes, setQuotes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authError, setAuthError] = useState('');
 
-  // Super simple static password for MVP (Change this to whatever you want!)
-  const ADMIN_PASSWORD = 'Lara2026'; 
+  // Check for an active session on load
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (session) fetchQuotes();
+      else setLoading(false);
+    });
 
-  const handleLogin = (e: React.FormEvent) => {
+    // Listen for login/logout events
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session) fetchQuotes();
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      fetchQuotes();
-    } else {
-      alert('Incorrect Password');
-    }
+    setLoading(true);
+    setAuthError('');
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) setAuthError(error.message);
+    setLoading(false);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setQuotes([]);
   };
 
   const fetchQuotes = async () => {
     setLoading(true);
-    // Fetch all quotes, ordered by newest first
     const { data, error } = await supabase
       .from('quote_requests')
       .select('*')
@@ -37,29 +61,48 @@ export default function AdminDashboard() {
     setLoading(false);
   };
 
-  if (!isAuthenticated) {
+  if (loading && !session) {
+    return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-blue-500"><Loader2 className="animate-spin" size={32}/></div>;
+  }
+
+  // SECURE LOGIN SCREEN
+  if (!session) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
         <form onSubmit={handleLogin} className="bg-slate-900 border border-slate-800 p-8 rounded-2xl w-full max-w-sm shadow-xl text-center">
           <div className="w-16 h-16 bg-blue-900/30 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock size={32} />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-6">Trading Desk Portal</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Secure Portal</h2>
+          
+          <input 
+            type="email" 
+            placeholder="Admin Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-4 rounded-xl bg-slate-950 border border-slate-800 text-white mb-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
           <input 
             type="password" 
-            placeholder="Enter Master Password" 
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            className="w-full p-4 rounded-xl bg-slate-950 border border-slate-800 text-white mb-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-4 rounded-xl bg-slate-950 border border-slate-800 text-white mb-6 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
-          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all">
-            Access Dashboard
+          
+          {authError && <p className="text-red-400 text-sm mb-4">{authError}</p>}
+          
+          <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-50">
+            {loading ? <Loader2 className="animate-spin" size={20}/> : 'Authenticate'}
           </button>
         </form>
       </div>
     );
   }
 
+  // SECURE DASHBOARD
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-12 font-sans">
       <div className="max-w-7xl mx-auto">
@@ -68,14 +111,16 @@ export default function AdminDashboard() {
             <h1 className="text-3xl font-black text-slate-900">Quote Requests</h1>
             <p className="text-slate-500 mt-1">Live incoming leads from larametals.com</p>
           </div>
-          <button onClick={() => setIsAuthenticated(false)} className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-red-500 transition-colors">
-            <LogOut size={16}/> Lock Dashboard
+          <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-red-500 transition-colors">
+            <LogOut size={16}/> Secure Logout
           </button>
         </div>
 
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           {loading ? (
-            <div className="p-12 text-center text-slate-500 font-medium">Syncing database...</div>
+            <div className="p-12 text-center text-slate-500 font-medium flex justify-center items-center gap-2">
+              <Loader2 className="animate-spin" size={20}/> Decrypting database...
+            </div>
           ) : quotes.length === 0 ? (
             <div className="p-12 text-center text-slate-500 font-medium">No quote requests found.</div>
           ) : (
