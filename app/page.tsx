@@ -16,7 +16,6 @@ export default function HomePage() {
   const [statusMessage, setStatusMessage] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
-  // New state to control the popup image modal
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,8 +59,6 @@ export default function HomePage() {
       {/* Navigation */}
       <header className={`sticky top-0 z-50 backdrop-blur-md border-b shadow-sm transition-colors duration-300 ${darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-white/80 border-slate-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          
-          {/* TWEAK 1: Upsized Logo & Text */}
           <a href="#" className="flex items-center gap-4 group">
             <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-400 shadow-md group-hover:shadow-lg transition-all transform group-hover:-translate-y-0.5">
               <Hexagon className="text-white fill-white/20" size={30} />
@@ -79,11 +76,7 @@ export default function HomePage() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`p-2.5 rounded-full transition-colors ${darkMode ? 'bg-slate-900 hover:bg-slate-800 text-blue-400' : 'bg-slate-100 hover:bg-slate-200 text-blue-600'}`}
-              aria-label="Toggle Dark Mode"
-            >
+            <button onClick={() => setDarkMode(!darkMode)} className={`p-2.5 rounded-full transition-colors ${darkMode ? 'bg-slate-900 hover:bg-slate-800 text-blue-400' : 'bg-slate-100 hover:bg-slate-200 text-blue-600'}`}>
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <a href="#quote" className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
@@ -119,7 +112,7 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* FEATURE 1: How It Works Timeline */}
+      {/* Process Section */}
       <motion.section id="process" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         <div className="text-center mb-16">
           <motion.h2 variants={fadeUp} className={`text-3xl font-black tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>Streamlined Processing</motion.h2>
@@ -144,46 +137,48 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Materials Section */}
+      {/* Materials Section - UPDATED WITH LOCAL PATHS */}
       <motion.section id="materials" className={`py-24 px-6 border-y scroll-mt-24 ${darkMode ? 'bg-slate-900/30 border-slate-800' : 'bg-slate-50 border-slate-200'}`} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         <div className="text-center mb-16 max-w-7xl mx-auto">
           <motion.h2 variants={fadeUp} className={`text-3xl font-black tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>Accepted Commodities</motion.h2>
           <motion.p variants={fadeUp} className={`mt-3 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Click any highlighted material to view industry examples.</motion.p>
         </div>
 
-        {/* TWEAK 2: Button Triggers for Modal Images */}
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Card 1 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Non-Ferrous Metals" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Non-Ferrous Metals</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1622322883908-115f02bc5622?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Bare bright copper</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1584985223011-820ceba4663e?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>insulated wire</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/bare-bright.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Bare bright copper</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/insulated-wire.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>insulated wire</button>,{' '}
                 yellow/red brass, and stainless steel.
               </p>
             </div>
           </motion.div>
 
+          {/* Card 2 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80" alt="Ferrous Scrap" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Ferrous Scrap</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Heavy melting steel (HMS 1&2)</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>structural beam offcuts</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/hms-scrap.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Heavy melting steel (HMS 1&2)</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/steel-beams.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>structural beam offcuts</button>,{' '}
                 and cast iron.
               </p>
             </div>
           </motion.div>
 
+          {/* Card 3 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="E-Scrap" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Specialty & E-Scrap</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1612803875545-a91599540b6e?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Electric motors</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('https://images.unsplash.com/photo-1544724569-5f546fd6f2b6?auto=format&fit=crop&w=1200&q=80')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>transformers</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/motors.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Electric motors</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/transformers.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>transformers</button>,{' '}
                 carbide, and industrial electronics.
               </p>
             </div>
@@ -191,7 +186,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* FEATURE 2: Industries Served */}
+      {/* Industries Section */}
       <motion.section id="industries" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         <div className="text-center mb-16">
           <motion.h2 variants={fadeUp} className={`text-3xl font-black tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>Industries We Serve</motion.h2>
@@ -213,7 +208,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* FEATURE 3: Sustainability & ESG Section */}
+      {/* Sustainability Section */}
       <motion.section className={`py-20 px-6 border-y ${darkMode ? 'bg-emerald-950/20 border-emerald-900/30' : 'bg-emerald-50 border-emerald-100'}`} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <motion.div variants={fadeUp} className="md:w-1/2 space-y-6">
@@ -235,7 +230,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* FEATURE 4: Interactive Map & Contact */}
+      {/* Map & Contact Section */}
       <section className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24" id="contact">
         <div className="grid md:grid-cols-2 gap-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-8">
@@ -323,7 +318,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* TWEAK 2: Image Lightbox Modal */}
+      {/* Image Lightbox Modal */}
       <AnimatePresence>
         {activeImage && (
           <motion.div
@@ -340,7 +335,7 @@ export default function HomePage() {
               src={activeImage}
               alt="Material Close-up"
               className="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain cursor-default"
-              onClick={(e) => e.stopPropagation()} // Prevents the image itself from closing when clicked directly
+              onClick={(e) => e.stopPropagation()}
             />
           </motion.div>
         )}
