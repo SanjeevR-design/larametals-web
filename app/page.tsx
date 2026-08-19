@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { 
   ArrowRight, ShieldCheck, 
   Truck, Scale, ChevronDown, CheckCircle2,
-  Mail, MapPin, Clock, Award, ExternalLink
+  Mail, MapPin, Clock, Award, ExternalLink, Hexagon
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -65,8 +65,12 @@ export default function HomePage() {
       {/* Navigation */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="flex items-center gap-2">
-            {/* Upgraded Professional Typography for Logo */}
+          
+          {/* OPTION 1 LOGO: Forged Hexagon */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-sky-400 shadow-md group-hover:shadow-lg transition-all transform group-hover:-translate-y-0.5">
+              <Hexagon className="text-white fill-white/20" size={24} />
+            </div>
             <span className="font-serif text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-sky-500">
               LaRa Metals
             </span>
