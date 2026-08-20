@@ -60,10 +60,10 @@ export default function HomePage() {
       <header className={`sticky top-0 z-50 backdrop-blur-md border-b shadow-sm transition-colors duration-300 ${darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-white/80 border-slate-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           
-          {/* LOGO INTEGRATION */}
+          {/* TWEAK 1: MUCH BIGGER LOGO INTEGRATION */}
           <a href="#" className="flex items-center gap-4 group">
-            <div className={`transition-all duration-300 ${darkMode ? 'bg-white/95 p-2 rounded-xl shadow-sm' : 'bg-transparent'}`}>
-              <img src="/Logo.png" alt="LaRa Metals Official Logo" className="h-10 md:h-12 w-auto object-contain transform group-hover:scale-105 transition-transform" />
+            <div className={`transition-all duration-300 ${darkMode ? 'bg-white/95 p-3 rounded-2xl shadow-md' : 'bg-transparent'}`}>
+              <img src="/Logo.png" alt="LaRa Metals Official Logo" className="h-14 sm:h-20 md:h-24 w-auto object-contain transform group-hover:scale-105 transition-transform" />
             </div>
           </a>
 
