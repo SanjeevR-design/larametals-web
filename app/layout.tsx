@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LaRa Metals | Premier Scrap Metal Aggregators",
-  description: "Institutional service for industrial and commercial scrap metal recycling. We buy ferrous, non-ferrous, and e-scrap.",
+  title: 'LaRa Metals | Premier Scrap Metal Aggregators',
+  description: 'Institutional Service for Industrial & Commercial Scrap',
+  icons: {
+    icon: '/Logo.png',
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
