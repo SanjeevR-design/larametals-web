@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'LaRa Metals | Premier Scrap Metal Aggregators',
   description: 'Institutional Service for Industrial & Commercial Scrap',
   icons: {
-    icon: '/LR-icon.png',
+    icon: '/LR-Icon.png',
   },
 };
 
