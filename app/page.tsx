@@ -5,7 +5,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { 
   ArrowRight, ShieldCheck, Truck, Scale, ChevronDown, CheckCircle2,
-  Mail, MapPin, Clock, Award, Hexagon, Sun, Moon, 
+  Mail, MapPin, Clock, Award, Sun, Moon, 
   ClipboardCheck, BadgeDollarSign, HardHat, Factory, Cpu, Plane, Leaf, Recycle, BarChart3
 } from 'lucide-react';
 
@@ -54,32 +54,31 @@ export default function HomePage() {
   };
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-300 selection:bg-blue-500/30 selection:text-blue-200 ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
+    <div className={`min-h-screen font-sans transition-colors duration-300 selection:bg-emerald-500/30 selection:text-emerald-200 ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
       
       {/* Navigation */}
       <header className={`sticky top-0 z-50 backdrop-blur-md border-b shadow-sm transition-colors duration-300 ${darkMode ? 'bg-slate-950/80 border-slate-800' : 'bg-white/80 border-slate-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          
+          {/* LOGO INTEGRATION */}
           <a href="#" className="flex items-center gap-4 group">
-            <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-400 shadow-md group-hover:shadow-lg transition-all transform group-hover:-translate-y-0.5">
-              <Hexagon className="text-white fill-white/20" size={30} />
+            <div className={`transition-all duration-300 ${darkMode ? 'bg-white/95 p-2 rounded-xl shadow-sm' : 'bg-transparent'}`}>
+              <img src="/Logo.png" alt="LaRa Metals Official Logo" className="h-10 md:h-12 w-auto object-contain transform group-hover:scale-105 transition-transform" />
             </div>
-            <span className={`font-serif text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-blue-400 to-sky-300' : 'from-blue-800 to-sky-500'}`}>
-              LaRa Metals
-            </span>
           </a>
 
           <nav className={`hidden md:flex gap-8 font-medium text-sm ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-            <a href="#process" className={`transition-colors duration-200 ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'}`}>Process</a>
-            <a href="#materials" className={`transition-colors duration-200 ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'}`}>Materials</a>
-            <a href="#industries" className={`transition-colors duration-200 ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'}`}>Industries</a>
-            <a href="#faq" className={`transition-colors duration-200 ${darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'}`}>FAQ</a>
+            <a href="#process" className={`transition-colors duration-200 ${darkMode ? 'hover:text-emerald-400' : 'hover:text-emerald-600'}`}>Process</a>
+            <a href="#materials" className={`transition-colors duration-200 ${darkMode ? 'hover:text-emerald-400' : 'hover:text-emerald-600'}`}>Materials</a>
+            <a href="#industries" className={`transition-colors duration-200 ${darkMode ? 'hover:text-emerald-400' : 'hover:text-emerald-600'}`}>Industries</a>
+            <a href="#faq" className={`transition-colors duration-200 ${darkMode ? 'hover:text-emerald-400' : 'hover:text-emerald-600'}`}>FAQ</a>
           </nav>
 
           <div className="flex items-center gap-4">
-            <button onClick={() => setDarkMode(!darkMode)} className={`p-2.5 rounded-full transition-colors ${darkMode ? 'bg-slate-900 hover:bg-slate-800 text-blue-400' : 'bg-slate-100 hover:bg-slate-200 text-blue-600'}`}>
+            <button onClick={() => setDarkMode(!darkMode)} className={`p-2.5 rounded-full transition-colors ${darkMode ? 'bg-slate-900 hover:bg-slate-800 text-emerald-400' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`}>
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <a href="#quote" className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-full transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
+            <a href="#quote" className={`hidden sm:flex items-center gap-2 font-semibold px-5 py-2.5 rounded-full transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm ${darkMode ? 'bg-emerald-600 hover:bg-emerald-500 text-white' : 'bg-slate-900 hover:bg-slate-800 text-white'}`}>
               <Mail size={16} /> Quote Desk
             </a>
           </div>
@@ -88,16 +87,16 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className={`relative py-28 px-6 overflow-hidden ${darkMode ? 'bg-gradient-to-b from-slate-900 to-slate-950' : 'bg-gradient-to-b from-white to-slate-50'}`}>
-        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 rounded-full blur-3xl -z-10 opacity-60 ${darkMode ? 'bg-blue-900/20' : 'bg-sky-100/50'}`}></div>
+        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 rounded-full blur-3xl -z-10 opacity-60 ${darkMode ? 'bg-emerald-900/10' : 'bg-slate-200/50'}`}></div>
         <motion.div className="max-w-5xl mx-auto text-center space-y-8 relative z-10" variants={staggerContainer} initial="hidden" animate="visible">
           <motion.div variants={fadeUp}>
-            <span className={`inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border shadow-sm ${darkMode ? 'bg-blue-900/30 text-blue-300 border-blue-800/50' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
-              <ShieldCheck size={14} className={darkMode ? "text-blue-400" : "text-blue-600"} /> Premier Scrap Metal Aggregators & Recyclers
+            <span className={`inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border shadow-sm ${darkMode ? 'bg-slate-900 text-emerald-400 border-slate-800' : 'bg-slate-100 text-slate-700 border-slate-200'}`}>
+              <ShieldCheck size={14} className={darkMode ? "text-emerald-400" : "text-emerald-600"} /> Premier Scrap Metal Aggregators & Recyclers
             </span>
           </motion.div>
           <motion.h1 variants={fadeUp} className={`text-5xl sm:text-7xl font-black leading-tight tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             Institutional Service for <br />
-            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-blue-400 to-sky-300' : 'from-blue-600 to-sky-400'}`}>
+            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-emerald-400 to-teal-200' : 'from-slate-900 to-slate-600'}`}>
               Industrial & Commercial Scrap
             </span>
           </motion.h1>
@@ -105,7 +104,7 @@ export default function HomePage() {
             LaRa Metals bridges industrial scrap generators, trade contractors, and global foundries with transparent, formula-backed pricing, rapid logistics, and immediate settlement.
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center pt-6">
-            <a href="#quote" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
+            <a href="#quote" className={`font-bold text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2 ${darkMode ? 'bg-emerald-600 hover:bg-emerald-500 text-white' : 'bg-slate-900 hover:bg-slate-800 text-white'}`}>
               Request Custom Estimate <ArrowRight size={18} />
             </a>
           </motion.div>
@@ -127,7 +126,7 @@ export default function HomePage() {
             { icon: BadgeDollarSign, title: '4. Immediate Settlement', desc: 'Instant payout via wire, check, or digital transfer—no waiting.' },
           ].map((step, idx) => (
             <motion.div key={idx} variants={fadeUp} className="relative z-10 flex flex-col items-center text-center">
-              <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-md border-4 ${darkMode ? 'bg-slate-900 border-slate-950 text-blue-400' : 'bg-white border-slate-50 text-blue-600'}`}>
+              <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-md border-4 ${darkMode ? 'bg-slate-900 border-slate-950 text-emerald-400' : 'bg-white border-slate-50 text-slate-800'}`}>
                 <step.icon size={36} />
               </div>
               <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
@@ -137,7 +136,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Materials Section - UPDATED WITH LOCAL PATHS */}
+      {/* Materials Section */}
       <motion.section id="materials" className={`py-24 px-6 border-y scroll-mt-24 ${darkMode ? 'bg-slate-900/30 border-slate-800' : 'bg-slate-50 border-slate-200'}`} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
         <div className="text-center mb-16 max-w-7xl mx-auto">
           <motion.h2 variants={fadeUp} className={`text-3xl font-black tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>Accepted Commodities</motion.h2>
@@ -145,40 +144,37 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Non-Ferrous Metals" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Non-Ferrous Metals</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('/bare-bright.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Bare bright copper</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('/insulated-wire.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>insulated wire</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/bare-bright.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>Bare bright copper</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/insulated-wire.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>insulated wire</button>,{' '}
                 yellow/red brass, and stainless steel.
               </p>
             </div>
           </motion.div>
 
-          {/* Card 2 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80" alt="Ferrous Scrap" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Ferrous Scrap</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('/hms-scrap.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Heavy melting steel (HMS 1&2)</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('/steel-beams.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>structural beam offcuts</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/hms-scrap.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>Heavy melting steel (HMS 1&2)</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/steel-beams.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>structural beam offcuts</button>,{' '}
                 and cast iron.
               </p>
             </div>
           </motion.div>
 
-          {/* Card 3 */}
           <motion.div variants={fadeUp} whileHover={{ y: -8 }} className={`rounded-3xl overflow-hidden border shadow-md transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="E-Scrap" className="w-full h-48 object-cover" />
             <div className="p-8">
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Specialty & E-Scrap</h3>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <button type="button" onClick={() => setActiveImage('/motors.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>Electric motors</button>,{' '}
-                <button type="button" onClick={() => setActiveImage('/transformers.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-blue-400 hover:text-blue-300 decoration-blue-800' : 'text-blue-600 hover:text-blue-800 decoration-blue-200'}`}>transformers</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/motors.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>Electric motors</button>,{' '}
+                <button type="button" onClick={() => setActiveImage('/transformers.jpg')} className={`font-semibold underline underline-offset-4 decoration-2 ${darkMode ? 'text-emerald-400 hover:text-emerald-300 decoration-emerald-800' : 'text-slate-700 hover:text-slate-900 decoration-slate-300'}`}>transformers</button>,{' '}
                 carbide, and industrial electronics.
               </p>
             </div>
@@ -200,33 +196,11 @@ export default function HomePage() {
             { icon: Plane, title: 'Aerospace & Automotive', desc: 'High-temp alloys, aluminum extrusions, and specialty metals.' },
           ].map((ind, idx) => (
             <motion.div key={idx} variants={fadeUp} className={`p-8 rounded-2xl border transition-colors ${darkMode ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50'}`}>
-              <ind.icon className={`mb-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} size={32} />
+              <ind.icon className={`mb-4 ${darkMode ? 'text-emerald-400' : 'text-slate-800'}`} size={32} />
               <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>{ind.title}</h3>
               <p className={`text-sm ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>{ind.desc}</p>
             </motion.div>
           ))}
-        </div>
-      </motion.section>
-
-      {/* Sustainability Section */}
-      <motion.section className={`py-20 px-6 border-y ${darkMode ? 'bg-emerald-950/20 border-emerald-900/30' : 'bg-emerald-50 border-emerald-100'}`} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <motion.div variants={fadeUp} className="md:w-1/2 space-y-6">
-            <span className={`inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border ${darkMode ? 'bg-emerald-900/30 text-emerald-400 border-emerald-800/50' : 'bg-emerald-100 text-emerald-700 border-emerald-200'}`}>
-              <Leaf size={14} /> ESG Compliant Recycling
-            </span>
-            <h2 className={`text-3xl font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>Building a Zero-Landfill Future.</h2>
-            <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              Corporate sustainability is no longer optional. Partnering with LaRa Metals ensures your industrial scrap is repurposed efficiently, lowering carbon footprints and helping your firm hit its environmental, social, and governance (ESG) targets.
-            </p>
-            <div className="flex gap-4">
-              <div className="flex items-center gap-2"><Recycle className="text-emerald-500" size={20}/> <span className={`text-sm font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>100% Repurposed</span></div>
-              <div className="flex items-center gap-2"><BarChart3 className="text-emerald-500" size={20}/> <span className={`text-sm font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>Data-Driven Tracking</span></div>
-            </div>
-          </motion.div>
-          <motion.div variants={fadeUp} className="md:w-1/2 w-full">
-            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80" alt="Scrap Processing" className="rounded-3xl shadow-xl border border-emerald-500/20 object-cover h-80 w-full grayscale-[20%]" />
-          </motion.div>
         </div>
       </motion.section>
 
@@ -243,12 +217,12 @@ export default function HomePage() {
             </motion.div>
             <div className="grid grid-cols-2 gap-4">
                <div className={`p-4 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <MapPin className={`mb-2 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} size={20}/>
+                  <MapPin className={`mb-2 ${darkMode ? 'text-emerald-400' : 'text-slate-700'}`} size={20}/>
                   <h4 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-slate-900'}`}>Location</h4>
                   <p className={`text-xs mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>539 W. Commerce St.<br/>Dallas, TX 75208</p>
                </div>
                <div className={`p-4 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <Clock className={`mb-2 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} size={20}/>
+                  <Clock className={`mb-2 ${darkMode ? 'text-emerald-400' : 'text-slate-700'}`} size={20}/>
                   <h4 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-slate-900'}`}>Hours (CST)</h4>
                   <p className={`text-xs mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Mon-Fri: 7am - 5pm<br/>Sat: 8am - 12pm</p>
                </div>
@@ -257,15 +231,15 @@ export default function HomePage() {
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} id="quote">
             <div className={`p-8 md:p-10 rounded-3xl border relative overflow-hidden ${darkMode ? 'bg-slate-900 border-slate-800 shadow-lg' : 'bg-white border-slate-100 shadow-xl'}`}>
-              <div className={`absolute top-0 right-0 w-32 h-32 rounded-bl-full -z-10 ${darkMode ? 'bg-blue-900/10' : 'bg-blue-50'}`}></div>
+              <div className={`absolute top-0 right-0 w-32 h-32 rounded-bl-full -z-10 ${darkMode ? 'bg-emerald-900/10' : 'bg-slate-100'}`}></div>
               <h2 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Request a Custom Valuation</h2>
               <p className={`mb-8 text-sm ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Submit specs for our trading desk.</p>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <input type="text" placeholder="Full Name / Company Name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required />
-                <input type="tel" placeholder="Direct Phone Number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required />
-                <textarea rows={4} placeholder="Detail your scrap load..." value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm resize-none ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required ></textarea>
-                <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-md transition-all">
+                <input type="text" placeholder="Full Name / Company Name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all text-sm ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required />
+                <input type="tel" placeholder="Direct Phone Number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all text-sm ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required />
+                <textarea rows={4} placeholder="Detail your scrap load..." value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all text-sm resize-none ${darkMode ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200'}`} required ></textarea>
+                <button type="submit" disabled={loading} className={`w-full font-bold py-4 rounded-xl shadow-md transition-all ${darkMode ? 'bg-emerald-600 hover:bg-emerald-500 text-white' : 'bg-slate-900 hover:bg-slate-800 text-white'}`}>
                   {loading ? 'Transmitting...' : 'Submit Quote Request'}
                 </button>
               </form>
@@ -290,10 +264,10 @@ export default function HomePage() {
         
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} className={`rounded-2xl border overflow-hidden transition-colors ${darkMode ? 'bg-slate-900 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-blue-200'}`}>
+            <motion.div key={idx} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} className={`rounded-2xl border overflow-hidden transition-colors ${darkMode ? 'bg-slate-900 border-slate-800 hover:border-slate-700' : 'bg-white border-slate-200 hover:border-slate-300'}`}>
               <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className={`w-full p-6 text-left font-bold flex justify-between items-center ${darkMode ? 'bg-slate-900 text-slate-200' : 'bg-white text-slate-800'}`}>
                 <span className="pr-4">{faq.q}</span>
-                <ChevronDown className={`shrink-0 transition-transform duration-300 ${darkMode ? 'text-blue-400' : 'text-blue-500'} ${openFaq === idx ? 'rotate-180' : ''}`} size={20} />
+                <ChevronDown className={`shrink-0 transition-transform duration-300 ${darkMode ? 'text-emerald-400' : 'text-slate-500'} ${openFaq === idx ? 'rotate-180' : ''}`} size={20} />
               </button>
               <AnimatePresence>
                 {openFaq === idx && (
@@ -326,7 +300,7 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveImage(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-6 cursor-pointer"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-6 cursor-pointer"
           >
             <motion.img
               initial={{ scale: 0.9 }}
